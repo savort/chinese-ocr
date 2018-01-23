@@ -29,12 +29,13 @@ cd train & sh train-pytorch.sh
 ```
 # 文字方向检测
 基于图像分类，在VGG16模型的基础上，训练0、90、180、270度检测的分类模型，详细代码参考angle/predict.py文件，训练图片8000张，准确率88.23%。
+
 模型下载地址：[百度云](https://pan.baidu.com/s/1pM2ha5P)
 
 # 文字检测
-[文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
-
-在原作者的代码基础上修改编译代码，新增支持CPU模式下的文字检测，详见:https://github.com/chineseocr/new-text-detection-ctpn.git   
+支持CPU、GPU环境，一键部署，
+[文本检测训练参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
+ 
 
 # OCR 端到端识别:GRU+CTC
 ## ocr识别采用GRU+CTC端到到识别技术，实现不分隔识别不定长文字
