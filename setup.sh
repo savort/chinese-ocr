@@ -1,13 +1,17 @@
-conda create -n chinese-ocr python=2.7 pip scipy numpy PIL jupyter ##运用conda 创建python环境
-source activate chinese-ocr
-pip install easydict -i https://pypi.tuna.tsinghua.edu.cn/simple/ ##选择国内源，速度更快
-pip install keras==2.0.8  -i https://pypi.tuna.tsinghua.edu.cn/simple/  
-pip install Cython opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple/ 
-pip install matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple/ 
-pip install -U pillow -i https://pypi.tuna.tsinghua.edu.cn/simple/
-pip install  h5py lmdb mahotas -i https://pypi.tuna.tsinghua.edu.cn/simple/
-conda install pytorch=0.1.12 cuda80 torchvision -c soumith
-conda install tensorflow=1.3 tensorflow-gpu=1.3 ##解决cuda报错相关问题
-cd ./ctpn/lib/utils
-sh make.sh
+pip instal numpy scipy matplotlib pillow jupyter
+pip install easydict opencv-python h5py lmdb mahotas
+pip install keras==2.0.8 cython==0.24
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ #添加国内源
+conda config --set show_channel_urls yes
 
+# for gpu
+pip install tensorflow-gpu==1.3.0
+conda install pytorch=0.1.12 cuda80 torchvision -c soumith
+chmod +x ./ctpn/lib/utils/make.sh
+./ctpn/lib/utils/make.sh
+
+# for cpu
+# pip install tensorflow==1.3.0
+# conda install pytorch=0.1.12 torchvision -c soumith
+# chmod +x ./ctpn/lib/utils/make-for-cpu.sh
+# ./ctpn/lib/utils/make-for-cpu.sh

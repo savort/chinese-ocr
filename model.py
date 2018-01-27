@@ -1,13 +1,19 @@
-#coding:utf-8
-##添加文本方向 检测模型，自动检测文字方向，0、90、180、270
-from ctpn.text_detect import text_detect
-from ocr.model import predict as ocr
-from angle.predict import predict as angle_detect##文字方向检测
-from crnn.crnn import crnnOcr
+#-*- coding:utf-8 -*-
+##添加文本方向检测模型，自动检测文字方向，0、90、180、270
+import os
+import sys
+import cv2
 from math import *
 import numpy as np
-import cv2
 from PIL import Image
+sys.path.append(os.getcwd() + '/ctpn')
+from ctpn.text_detect import text_detect
+from lib.fast_rcnn.config import cfg_from_file
+from ocr.model import predict as ocr
+from crnn.crnn import crnnOcr
+from angle.predict import predict as angle_detect ##文字方向检测
+
+
 def crnnRec(im,text_recs,ocrMode='keras',adjust=False):
    """
    crnn模型，ocr识别
@@ -72,11 +78,10 @@ def dumpRotateImage(img,degree,pt1,pt2,pt3,pt4):
 
 def model(img,model='keras',adjust=False,detectAngle=False):
     """
-    @@param:img,
-    @@param:model,选择的ocr模型，支持keras\pytorch版本
-    @@param:adjust 调整文字识别结果
-    @@param:detectAngle,是否检测文字朝向
-    
+    @@param: img, 图片
+    @@param: model, 选择的ocr模型，支持keras\pytorch版本
+    @@param: adjust, 调整文字识别结果
+    @@param: detectAngle, 是否检测文字朝向
     """
     angle = 0
     if detectAngle:
@@ -91,6 +96,7 @@ def model(img,model='keras',adjust=False,detectAngle=False):
             im = im.transpose(Image.ROTATE_270)
         img = np.array(im)
         
+    cfg_from_file('./ctpn/ctpn/text.yml')
     text_recs,tmp,img = text_detect(img)
     text_recs = sort_box(text_recs)
     result = crnnRec(img,text_recs,model,adjust=adjust)

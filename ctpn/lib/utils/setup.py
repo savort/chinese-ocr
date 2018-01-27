@@ -38,7 +38,6 @@ def locate_cuda():
 
 CUDA = locate_cuda()
 
-
 try:
     numpy_include = np.get_include()
 except AttributeError:
