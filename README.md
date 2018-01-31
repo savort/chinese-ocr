@@ -1,4 +1,4 @@
-# 本文基于tensorflow、keras/pytorch实现对自然场景的文字检测及端到端的OCR中文文字识别
+# 基于tensorflow、keras/pytorch实现对自然场景的文字检测及端到端的OCR中文文字识别
 
 # 实现功能
 
@@ -26,9 +26,9 @@ cd train & sh train-pytorch.sh
 ```
 
 # 文字方向检测
-在VGG16模型的基础上进行迁移学习，训练文字方向检测（0、90、180、270度）分类模型，详细代码参考angle/predict.py文件，训练图片8000张，准确率88.23%。
+在VGG16模型的基础上进行迁移学习，训练文字方向检测（0、90、180、270度）分类模型，详细代码参考angle/predict.py文件，训练图片100000张，准确率95.10%。
 
-模型下载地址：[百度云](https://pan.baidu.com/s/1pM2ha5P)
+模型下载地址：[百度云](https://pan.baidu.com/s/1nwEyxDZ)
 
 # 文字检测
 支持CPU、GPU环境，一键部署，文本检测训练参考：[https://github.com/eragonruan/text-detection-ctpn](https://github.com/eragonruan/text-detection-ctpn)
