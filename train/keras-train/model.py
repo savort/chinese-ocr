@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding:utf-8 -*-
 from keras.layers import Input,Conv2D,MaxPooling2D,ZeroPadding2D
 from keras.layers import Flatten,BatchNormalization,Permute,TimeDistributed,Dense,Bidirectional,GRU
 from keras.models import Model
@@ -9,11 +9,11 @@ from keras import backend as K
 from keras.layers import Lambda
 from keras.optimizers import SGD
 
+
 def ctc_lambda_func(args):
     y_pred, labels, input_length, label_length = args
     y_pred = y_pred[:, 2:, :]
     return K.ctc_batch_cost(labels, y_pred, input_length, label_length)
-
 
 def get_model(height,nclass):
     

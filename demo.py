@@ -1,6 +1,4 @@
 #-*- coding:utf-8 -*-
-import os
-import sys
 import time
 import model
 import numpy as np
@@ -10,7 +8,7 @@ paths = glob('./test/*.*')
 
 
 if __name__ =='__main__':
-    im = Image.open(paths[0])
+    im = Image.open(sorted(paths)[0])
     img = np.array(im.convert('RGB'))
     # img = img[:, :, ::-1]  # Convert RGB to BGR
     t = time.time()

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding:utf-8 -*-
 from train import *
 model,basemodel = get_model(height=imgH, nclass=nclass)
 import os
@@ -14,7 +14,7 @@ train_loader = torch.utils.data.DataLoader(
     collate_fn=dataset.alignCollate(imgH=imgH, imgW=imgW, keep_ratio=keep_ratio))
 
 testSize = 16
-#print test_dataset[0]
+# print test_dataset[0]
 test_loader = torch.utils.data.DataLoader(
     test_dataset, batch_size=testSize,
     shuffle=True, num_workers=int(workers)    )
@@ -44,7 +44,7 @@ for i in range(3):
                    
                    crrentLoss = model.evaluate(X,Y)
                    print "step:{},loss:{},crrentLoss:{}".format(j,loss,crrentLoss)
-                   if crrentLoss<loss:
+                   if crrentLoss < loss:
                         loss = crrentLoss
                         path = 'save_model/model{}.h5'.format(loss)
                         print "save model:".format(path)

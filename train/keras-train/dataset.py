@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#!/usr/bin/python
-# encoding: utf-8
+#-*- coding:utf-8 -*-
 
 import random
 import torch

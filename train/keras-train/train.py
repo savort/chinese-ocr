@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding:utf-8 -*-
 import torch
 import dataset
 import keys
@@ -7,12 +7,12 @@ import numpy as np
 characters = keys.alphabet[:]
 from model import get_model
 
-nclass = len(characters)+1
+nclass = len(characters) + 1
 
 import keras.backend as K
 
 trainroot = '../data/lmdb/train'
-valroot   = '../data/lmdb/val'
+valroot = '../data/lmdb/val'
 batchSize = 32
 workers = 4
 imgH = 32
@@ -44,7 +44,7 @@ def gen(loader,flag='train'):
             Y = np.array(Y)
             Length = int(imgW/4)-1
             batchs = X.shape[0]
-            #Y = Y.numpy()
+            # Y = Y.numpy()
             if i>n-1:
                 i = 0
                 break
@@ -78,7 +78,7 @@ if __name__=='__main__':
     if os.path.exists('../pretrain-models/keras.hdf5'):
        basemodel.load_weights('../pretrain-models/keras.hdf5')
     
-    ##注意此处保存的是model的权重
+    ## 注意此处保存的是model的权重
     checkpointer = ModelCheckpoint(filepath="save_model/model{epoch:02d}-{val_loss:.4f}.hdf5",monitor='val_loss',         verbose=0,save_weights_only=False, save_best_only=True)
     rlu = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=1, verbose=0, mode='auto', epsilon=0.0001, cooldown=0, min_lr=0)
 

@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+#-*- coding:utf-8 -*-
 import numpy as np
 from .generate_anchors import generate_anchors
 from ..fast_rcnn.config import cfg

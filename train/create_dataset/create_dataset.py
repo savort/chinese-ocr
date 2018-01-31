@@ -1,8 +1,9 @@
 import os
-import lmdb # install lmdb by "pip install lmdb"
+import lmdb
 import cv2
+import glob
 import numpy as np
-#from genLineText import GenTextImage
+
 
 def checkImageIsValid(imageBin):
     if imageBin is None:
@@ -16,12 +17,10 @@ def checkImageIsValid(imageBin):
         return False
     return True
 
-
 def writeCache(env, cache):
     with env.begin(write=True) as txn:
         for k, v in cache.iteritems():
             txn.put(k, v)
-
 
 def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkValid=True):
     """
@@ -82,12 +81,11 @@ def read_text(path):
     return text
 
 
-import glob
 if __name__ == '__main__':
     
-    ##lmdb 输出目录
+    # lmdb 输出目录
     outputPath = '../data/lmdb/train'
-    
+
     path = '../data/dataline/*.jpg'
     imagePathList = glob.glob(path)
     print '------------',len(imagePathList),'------------'
@@ -98,14 +96,11 @@ if __name__ == '__main__':
         except:
             continue
             
-    #imgLabelList = [ (p,read_text(p.replace('.jpg','.txt'))) for p in imagePathList]
-    ##sort by lebelList 
+    # imgLabelList = [ (p,read_text(p.replace('.jpg','.txt'))) for p in imagePathList]
+    # sort by lebelList 
     imgLabelList = sorted(imgLabelLists,key = lambda x:len(x[1]))
     imgPaths = [ p[0] for p in imgLabelList]
     txtLists = [ p[1] for p in imgLabelList]
     
     createDataset(outputPath, imgPaths, txtLists, lexiconList=None, checkValid=True)
-
-
-
 

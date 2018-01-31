@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+#-*- coding:utf-8 -*-
 import numpy as np
 import numpy.random as npr
 from .generate_anchors import generate_anchors

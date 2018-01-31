@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding:utf-8 -*-
 from __future__ import print_function
 import argparse
 import random
@@ -213,10 +213,9 @@ def trainBatch(net, criterion, optimizer,flage=False):
     optimizer.step()
     return cost
 
-num =0
+num = 0
 lasttestLoss = 10000
 testLoss = 10000
-import os
 
 def delete(path):
     """
@@ -227,9 +226,6 @@ def delete(path):
     paths = glob.glob(path+'/*.pth')
     for p in paths:
         os.remove(p)
-    
-    
-    
     
 numLoss = 0##判断训练参数是否下降    
     

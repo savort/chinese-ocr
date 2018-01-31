@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding:utf-8 -*-
 #from keras.models import load_model
 from keras.applications.vgg16 import preprocess_input,VGG16
 from keras.layers import Dense

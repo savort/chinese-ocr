@@ -1,4 +1,4 @@
-#coding:utf-8
+#-*- coding:utf-8 -*-
 import numpy as np
 from lib.fast_rcnn.nms_wrapper import nms
 from lib.fast_rcnn.config import cfg
@@ -16,7 +16,7 @@ class TextDetector:
         elif self.mode == "O":
             self.text_proposal_connector=TextProposalConnectorOriented()
 
-    def detect(self, text_proposals,scores,size):
+    def detect(self, text_proposals, scores, size):
         # 删除得分较低的proposal
         keep_inds=np.where(scores>TextLineCfg.TEXT_PROPOSALS_MIN_SCORE)[0]
         text_proposals, scores=text_proposals[keep_inds], scores[keep_inds]
@@ -36,6 +36,8 @@ class TextDetector:
         # 过滤boxes
         keep_inds=self.filter_boxes(text_recs)
         text_lines=text_recs[keep_inds]
+        
+        # 对lines做nms
         if text_lines.shape[0] != 0:
             keep_inds=nms(text_lines, TextLineCfg.TEXT_LINE_NMS_THRESH)
             text_lines=text_lines[keep_inds]
@@ -48,10 +50,10 @@ class TextDetector:
         scores=np.zeros((len(boxes), 1), np.float)
         index=0
         for box in boxes:
-            heights[index]=(abs(box[5]-box[1])+abs(box[7]-box[3]))/2.0+1
-            widths[index]=(abs(box[2]-box[0])+abs(box[6]-box[4]))/2.0+1
+            heights[index] = (abs(box[5] - box[1]) + abs(box[7] - box[3])) / 2.0 + 1
+            widths[index] = (abs(box[2] - box[0]) + abs(box[6] - box[4])) / 2.0 + 1
             scores[index] = box[8]
             index += 1
 
-        return np.where((widths/heights>TextLineCfg.MIN_RATIO) & (scores>TextLineCfg.LINE_MIN_SCORE) &
-                          (widths>(TextLineCfg.TEXT_PROPOSALS_WIDTH*TextLineCfg.MIN_NUM_PROPOSALS)))[0]
+        return np.where((widths / heights > TextLineCfg.MIN_RATIO) & (scores > TextLineCfg.LINE_MIN_SCORE) &
+                          (widths > (TextLineCfg.TEXT_PROPOSALS_WIDTH * TextLineCfg.MIN_NUM_PROPOSALS)))[0]

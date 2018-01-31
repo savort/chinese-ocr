@@ -20,15 +20,15 @@ def resize_im(im, scale, max_scale=None):
 def load_tf_model():
     # load config file
     cfg.TEST.checkpoints_path = './ctpn/checkpoints'
-
+    
     # init session
     gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.5)
     config = tf.ConfigProto(allow_soft_placement=True, gpu_options=gpu_options)
     sess = tf.Session(config=config)
-
+    
     # load network
     net = get_network("VGGnet_test")
-
+    
     # load model
     print('Loading network {:s}... '.format("VGGnet_test"))
     saver = tf.train.Saver()
@@ -50,13 +50,13 @@ def ctpn(img):
 
     img, scale = resize_im(img, scale=TextLineCfg.SCALE, max_scale=TextLineCfg.MAX_SCALE)
     scores, boxes = test_ctpn(sess, net, img)
-
+    
     textdetector = TextDetector()
     boxes = textdetector.detect(boxes, scores[:, np.newaxis], img.shape[:2])
     timer.toc()
     print(('Detection took {:.3f}s for '
            '{:d} object proposals').format(timer.total_time, boxes.shape[0]))
-
+    
     return scores, boxes, img, scale
 
 def draw_boxes(img, boxes, scale):
@@ -79,7 +79,7 @@ def draw_boxes(img, boxes, scale):
             text_recs[box_id, i] = box[i]
 
         box_id += 1
-
+    
     img = cv2.resize(img, None, None, fx=1.0/scale, fy=1.0/scale, interpolation=cv2.INTER_LINEAR)
     return text_recs, img
 
@@ -92,7 +92,7 @@ if __name__ == '__main__':
     from PIL import Image
     from lib.fast_rcnn.config import cfg_from_file
     cfg_from_file('./ctpn/ctpn/text.yml')
-    im = Image.open('test.jpg')
+    im = Image.open('./test/1.jpg')
     img = np.array(im.convert('RGB'))
     text_recs, img_drawed, img = text_detect(img)
     Image.fromarray(img_drawed).save('result.jpg')

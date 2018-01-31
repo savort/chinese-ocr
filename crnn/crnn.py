@@ -1,4 +1,4 @@
-#coding:utf-8
+#-*- coding:utf-8 -*-
 import sys
 sys.path.insert(1, "./crnn")
 import torch
@@ -13,23 +13,6 @@ from math import *
 import cv2
 GPU = False
 
-def dumpRotateImage_(img,degree,pt1,pt2,pt3,pt4):
-    height,width=img.shape[:2]
-    heightNew = int(width * fabs(sin(radians(degree))) + height * fabs(cos(radians(degree))))
-    widthNew = int(height * fabs(sin(radians(degree))) + width * fabs(cos(radians(degree))))
-    matRotation=cv2.getRotationMatrix2D((width/2,height/2),degree,1)
-    matRotation[0, 2] += (widthNew - width) / 2
-    matRotation[1, 2] += (heightNew - height) / 2
-    imgRotation = cv2.warpAffine(img, matRotation, (widthNew, heightNew), borderValue=(255, 255, 255))
-    pt1 = list(pt1)
-    pt3 = list(pt3)
-    
-    
-    [[pt1[0]], [pt1[1]]] = np.dot(matRotation, np.array([[pt1[0]], [pt1[1]], [1]]))
-    [[pt3[0]], [pt3[1]]] = np.dot(matRotation, np.array([[pt3[0]], [pt3[1]], [1]]))
-    imgOut=imgRotation[int(pt1[1]):int(pt3[1]),int(pt1[0]):int(pt3[0])]
-    height,width=imgOut.shape[:2]
-    return imgOut
 
 def crnnSource():
     alphabet = keys.alphabet
@@ -78,5 +61,4 @@ def crnnOcr(image):
              sim_pred=sim_pred[1:]
 
        return sim_pred
-       
 
