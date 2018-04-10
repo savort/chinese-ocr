@@ -51,7 +51,7 @@ class lmdbDataset(Dataset):
                 img = Image.open(buf).convert('L')
             except IOError:
                 print('Corrupted image for %d' % index)
-                if index>self.nSamples-1:
+                if index > self.nSamples - 1:
                     index = 0
                 return self[index + 1]
 

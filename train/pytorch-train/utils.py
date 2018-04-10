@@ -1,8 +1,8 @@
-#!/usr/bin/python
 #-*- coding:utf-8 -*-
 
 import torch
 import torch.nn as nn
+import torch.nn.parallel
 import collections
 
 
@@ -113,3 +113,11 @@ def assureRatio(img):
         main = nn.UpsamplingBilinear2d(size=(h, h), scale_factor=None)
         img = main(img)
     return img
+
+
+def data_parallel(model, input, ngpu):
+    if isinstance(input.data, torch.cuda.FloatTensor) and ngpu > 1:
+        output = nn.parallel.data_parallel(model, input, range(ngpu))
+    else:
+        output = model(input)
+    return output

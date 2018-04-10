@@ -1,16 +1,15 @@
-#!/usr/bin/python
 #-*- coding:utf-8 -*-
-
+import sys
+import six
+import lmdb
 import random
+import numpy as np
+from PIL import Image
+
 import torch
 from torch.utils.data import Dataset
 from torch.utils.data import sampler
 import torchvision.transforms as transforms
-import lmdb
-import six
-import sys
-from PIL import Image
-import numpy as np
 
 
 class lmdbDataset(Dataset):
@@ -52,6 +51,8 @@ class lmdbDataset(Dataset):
                 img = Image.open(buf).convert('L')
             except IOError:
                 print('Corrupted image for %d' % index)
+                if index > self.nSamples - 1:
+                    index = 0
                 return self[index + 1]
 
             if self.transform is not None:
@@ -92,12 +93,12 @@ class randomSequentialSampler(sampler.Sampler):
         index = torch.LongTensor(len(self)).fill_(0)
         for i in range(n_batch):
             random_start = random.randint(0, len(self) - self.batch_size)
-            batch_index = random_start + torch.range(0, self.batch_size - 1)
+            batch_index = random_start + torch.arange(0, self.batch_size)
             index[i * self.batch_size:(i + 1) * self.batch_size] = batch_index
         # deal with tail
         if tail:
             random_start = random.randint(0, len(self) - self.batch_size)
-            tail_index = random_start + torch.range(0, tail - 1)
+            tail_index = random_start + torch.arange(0, tail)
             index[(i + 1) * self.batch_size:] = tail_index
 
         return iter(index)

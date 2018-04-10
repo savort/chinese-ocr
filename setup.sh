@@ -12,6 +12,6 @@ chmod +x ./ctpn/lib/utils/make.sh
 
 # for cpu
 # pip install tensorflow==1.3.0
-# conda install pytorch=0.1.12 torchvision -c soumith
+# conda install pytorch-cpu torchvision-cpu -c jjh_pytorch
 # chmod +x ./ctpn/lib/utils/make-for-cpu.sh
 # ./ctpn/lib/utils/make-for-cpu.sh

@@ -1,3 +1,5 @@
+#-*- coding:utf-8 -*-
+
 import os
 import lmdb
 import cv2
@@ -33,11 +35,11 @@ def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkV
         lexiconList   : (optional) list of lexicon lists
         checkValid    : if true, check the validity of every image
     """
-    #print (len(imagePathList) , len(labelList))
+    # print (len(imagePathList) , len(labelList))
     assert(len(imagePathList) == len(labelList))
     nSamples = len(imagePathList)
     print '...................'
-    env = lmdb.open(outputPath, map_size=1099511627776)
+    env = lmdb.open(outputPath, map_size=1099511627776)  # 1T
     
     cache = {}
     cnt = 1
@@ -66,7 +68,7 @@ def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkV
             cache = {}
             print('Written %d / %d' % (cnt, nSamples))
         cnt += 1
-    nSamples = cnt-1
+    nSamples = cnt - 1
     cache['num-samples'] = str(nSamples)
     writeCache(env, cache)
     print('Created dataset with %d samples' % nSamples)
@@ -82,7 +84,6 @@ def read_text(path):
 
 
 if __name__ == '__main__':
-    
     # lmdb 输出目录
     outputPath = '../data/lmdb/train'
 
@@ -92,13 +93,13 @@ if __name__ == '__main__':
     imgLabelLists = []
     for p in imagePathList:
         try:
-           imgLabelLists.append((p,read_text(p.replace('.jpg','.txt'))))
+           imgLabelLists.append((p, read_text(p.replace('.jpg', '.txt'))))
         except:
             continue
             
-    # imgLabelList = [ (p,read_text(p.replace('.jpg','.txt'))) for p in imagePathList]
-    # sort by lebelList 
-    imgLabelList = sorted(imgLabelLists,key = lambda x:len(x[1]))
+    # imgLabelList = [ (p, read_text(p.replace('.jpg', '.txt'))) for p in imagePathList]
+    # sort by labelList
+    imgLabelList = sorted(imgLabelLists, key = lambda x:len(x[1]))
     imgPaths = [ p[0] for p in imgLabelList]
     txtLists = [ p[1] for p in imgLabelList]
     
