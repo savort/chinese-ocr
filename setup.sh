@@ -1,6 +1,7 @@
 pip instal numpy scipy matplotlib pillow jupyter
-pip install easydict opencv-python h5py lmdb mahotas
-pip install keras==2.0.8 cython==0.24
+pip install easydict opencv-python keras h5py lmdb mahotas PyYAML
+pip install cython==0.24
+
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ #添加国内源
 conda config --set show_channel_urls yes
 
@@ -13,5 +14,5 @@ chmod +x ./ctpn/lib/utils/make.sh
 # for cpu
 # pip install tensorflow==1.3.0
 # conda install pytorch-cpu torchvision-cpu -c jjh_pytorch
-# chmod +x ./ctpn/lib/utils/make-for-cpu.sh
-# ./ctpn/lib/utils/make-for-cpu.sh
+# chmod +x ./ctpn/lib/utils/make_cpu.sh
+# ./ctpn/lib/utils/make_cpu.sh
