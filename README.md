@@ -16,13 +16,13 @@ sh setup.sh
 ## 训练keras版本的crnn   
 
 ``` Bash
-cd train & sh train-keras.sh   
+cd train/keras-train & python train.py
 ```
 
 ## 训练pytorch版本的crnn   
 
 ``` Bash
-cd train & sh train-pytorch.sh   
+cd train/pytorch-train & python train.py
 ```
 
 # 文字方向检测
