@@ -2,9 +2,9 @@
 
 # 实现功能
 
-- [x] 文字方向检测：fine-tune VGG
+- [x] 文字方向检测：VGG
 - [x] 文本检测：CTPN
-- [x] 不定长OCR识别：CRNN
+- [x] 不定长OCR识别：CRNN + CTC
 
 ## 环境部署
 ``` Bash
@@ -34,7 +34,7 @@ cd train/pytorch-train & python train.py
 支持CPU、GPU环境，一键部署，文本检测训练参考：[https://github.com/eragonruan/text-detection-ctpn](https://github.com/eragonruan/text-detection-ctpn)
 
 # OCR端到端识别
-## 采用GRU+CTC端到端识别技术，实现不分隔识别不定长文字
+## 采用GRU + CTC端到端识别技术，实现不分隔识别不定长文字
 提供keras与pytorch版本的训练代码，在理解keras的基础上，可以切换到pytorch版本，此版本更稳定   
 
 # 识别结果展示
