@@ -40,15 +40,15 @@ cd train/pytorch-train & python train.py
 # 识别结果展示
 ## 文字检测及OCR识别结果
 <div>
-<img width="420" height="420" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.jpg"/>
-<img width="420" height="420" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.png"/>
+<img width="420" height="420" src="https://github.com/YCG09/chinese-ocr/blob/master/img/tmp.jpg"/>
+<img width="420" height="420" src="https://github.com/YCG09/chinese-ocr/blob/master/img/tmp.png"/>
 </div>
 
 ### 倾斜文字 
 
 <div>
-<img width="420" height="420" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp1.jpg"/>
-<img width="420" height="180" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp1.png"/>
+<img width="420" height="420" src="https://github.com/YCG09/chinese-ocr/blob/master/img/tmp1.jpg"/>
+<img width="420" height="180" src="https://github.com/YCG09/chinese-ocr/blob/master/img/tmp1.png"/>
 </div>
 
 ## 参考
