@@ -28,7 +28,9 @@ cd train/pytorch-train & python train.py
 # 文字方向检测
 在VGG16模型的基础上进行迁移学习，训练文字方向检测（0、90、180、270度）分类模型，详细代码参考angle/predict.py文件，训练图片100000张，准确率95.10%。
 
-模型下载地址：[百度云](https://pan.baidu.com/s/1nwEyxDZ)
+模型下载地址：
+* [baidu pan](https://pan.baidu.com/s/1nwEyxDZ)
+* [google drive](https://drive.google.com/file/d/14o6RL-cjyRq5XLP7UlKkt8KlDnMuw5Z_/view)
 
 # 文字检测
 支持CPU、GPU环境，一键部署，文本检测训练参考：[https://github.com/eragonruan/text-detection-ctpn](https://github.com/eragonruan/text-detection-ctpn)
